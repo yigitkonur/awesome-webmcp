@@ -8,9 +8,6 @@
 
 ## Contents
 
-- [Specification & Proposals](#specification--proposals)
-- [Specification Status](#specification-status)
-- [Browser Support](#browser-support)
 - [Official Tooling](#official-tooling)
 - [Polyfills & Core Libraries](#polyfills--core-libraries)
 - [Framework Libraries](#framework-libraries)
@@ -22,77 +19,12 @@
 - [Articles & Tutorials](#articles--tutorials)
 - [Videos & Talks](#videos--talks)
 - [Security Resources](#security-resources)
-- [Automation](#automation)
 - [Community](#community)
+- [Specification](#specification)
 - [API Quick Reference](#api-quick-reference)
 - [Key People](#key-people)
 
-## Specification & Proposals
-
-- [W3C WebMCP Specification](https://webmachinelearning.github.io/webmcp) - Normative spec draft defining [`navigator.modelContext`](https://webmachinelearning.github.io/webmcp#navigator.modelContext), [`registerTool()`](https://webmachinelearning.github.io/webmcp#registerTool), [`provideContext()`](https://webmachinelearning.github.io/webmcp#provideContext), [declarative HTML form attributes](https://github.com/webmachinelearning/webmcp/pull/76), [`toolactivated` and `toolcancel` events](https://webmachinelearning.github.io/webmcp#events), and [`:tool-form-active` and `:tool-submit-active` CSS pseudo-classes](https://webmachinelearning.github.io/webmcp#css-pseudo-classes).
-- [webmachinelearning/webmcp](https://github.com/webmachinelearning/webmcp) - Official W3C Community Group repo with Bikeshed spec source, explainers, [security/privacy docs](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md), and issue tracker.
-- [spiralgang/Workspace_Sync_Target](https://github.com/spiralgang/Workspace_Sync_Target) - W3C Web Machine Learning CG repository exploring WebMCP and GitHub-native agent orchestration patterns.
-- [Chrome WebMCP Early Preview](https://developer.chrome.com/blog/webmcp-epp) - Chrome for Developers blog with setup instructions, API overview, and demo walkthrough.
-- [Service Workers Explainer](https://github.com/webmachinelearning/webmcp/blob/main/docs/service-workers.md) - Background tool execution without a visible tab via JIT installation, session management, and discovery.
-- [Declarative API Explainer (PR #76)](https://github.com/webmachinelearning/webmcp/pull/76) - Formal explainer for HTML form-based tool registration using [`toolname`](https://github.com/webmachinelearning/webmcp/pull/76), [`tooldescription`](https://github.com/webmachinelearning/webmcp/pull/76), and [`toolautosubmit`](https://github.com/webmachinelearning/webmcp/pull/76) attributes.
-- [Security & Privacy Considerations](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md) - Official threat model covering [prompt injection](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#prompt-injection), [misrepresentation](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#misrepresentation), and [over-parameterization](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#privacy-leakage).
-- [Accessibility Considerations (Issue #65)](https://github.com/webmachinelearning/webmcp/issues/65) - WebMCP's potential to improve accessibility through agentic interfaces.
-- [In-Page Agent API (Issue #51)](https://github.com/webmachinelearning/webmcp/issues/51) - Defining API for agents embedded in the page to consume declared tools.
-- [Elicitation / requestUserInteraction (Issue #21)](https://github.com/webmachinelearning/webmcp/issues/21) - Design for yielding control to the user during tool execution, with abuse prevention.
-- [Tool Annotations & Side-Effect Hints (Issue #53)](https://github.com/webmachinelearning/webmcp/issues/53) - Structured metadata for tool safety hints like [`readOnlyHint`](https://github.com/webmachinelearning/webmcp/issues/53) and [`destructiveHint`](https://github.com/webmachinelearning/webmcp/issues/53).
-- [Agent Identity (Issue #54)](https://github.com/webmachinelearning/webmcp/issues/54) - Discussion on whether tools should know which agent is invoking them.
-- [Scope Clarification (Issue #43)](https://github.com/webmachinelearning/webmcp/issues/43) - What WebMCP covers vs. what belongs to the agent layer.
-- [Spec Discussion Analysis](docs/spec-discussions/) - Deep analysis of all 55 issues and 20 PRs, organized by theme. Covers [security debates](docs/spec-discussions/), API naming history, [declarative proposal evolution](https://github.com/webmachinelearning/webmcp/pull/76), and community feedback.
-
-## Specification Status
-
-### Key Resolutions
-
-Formal decisions from W3C CG meetings ([minutes archive](https://github.com/webmachinelearning/meetings)):
-
-- **Human-in-the-loop first.** Automation support deferred until security model matures. ([#27](https://github.com/webmachinelearning/webmcp/issues/27) by [@khushalsagar](https://github.com/khushalsagar))
-- **SDK abstraction.** Browser provides a translation layer between page and MCP client; decoupled from MCP version. ([#32](https://github.com/webmachinelearning/webmcp/issues/32) by [@khushalsagar](https://github.com/khushalsagar))
-- **`navigator.modelContext`** is the root object name. ([#24](https://github.com/webmachinelearning/webmcp/issues/24) by [@bwalderman](https://github.com/bwalderman))
-- **Tools as discovery mechanism.** Declarative API explored to enable crawling and indexing without executing JS. ([#8](https://github.com/webmachinelearning/webmcp/issues/8) by [@bokand](https://github.com/bokand))
-- **Both [`provideContext()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-providecontext) and [`registerTool()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-registertool)/`unregisterTool()` supported.** Batch replacement for SPAs, incremental for multi-component pages. ([#15](https://github.com/webmachinelearning/webmcp/issues/15) by [@bwalderman](https://github.com/bwalderman))
-- **No JS injection by external agents.** Higher-level hooks (extension API, CDP) preferred. ([#16](https://github.com/webmachinelearning/webmcp/issues/16) by [@bokand](https://github.com/bokand))
-- **[`requestUserInteraction()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-requestuserinteraction) for elicitation.** Abusive sites can be permanently blocked; error thrown so legitimate sites implement fallback. ([#21](https://github.com/webmachinelearning/webmcp/issues/21) by [@bwalderman](https://github.com/bwalderman))
-- **No concrete use case for user-takeover notification.** Elicitation ([#21](https://github.com/webmachinelearning/webmcp/issues/21)) handles site-initiated handoff. ([#20](https://github.com/webmachinelearning/webmcp/issues/20) by [@khushalsagar](https://github.com/khushalsagar))
-- **TAG endorsement.** Continue as high-level API; coordinate with AI Agent Protocol CG on new protocols. MCP governance moved to Linux Foundation's AAIF. ([#35](https://github.com/webmachinelearning/webmcp/issues/35) by [@xiaochengh](https://github.com/xiaochengh))
-- **Cross-origin agents scoped out of v1.** Focus on same-origin tool registration initially. ([#52](https://github.com/webmachinelearning/webmcp/issues/52) by [@khushalsagar](https://github.com/khushalsagar))
-- **Agent identity: revisit later.** No clear need for browser-mediated agent identity in v1. ([#54](https://github.com/webmachinelearning/webmcp/issues/54) by [@EmLauber](https://github.com/EmLauber))
-- **Declarative API complements imperative.** HTML form attributes (`toolname`, `tooldescription`) work alongside JS API. Chrome began prototyping. ([PR #26](https://github.com/webmachinelearning/webmcp/pull/26) by [@MiguelsPizza](https://github.com/MiguelsPizza))
-- **[`AbortSignal`](https://webmachinelearning.github.io/webmcp/#dom-executetoolparams) for cancellation.** Tool execute callbacks receive a signal for clean abort. ([#48](https://github.com/webmachinelearning/webmcp/issues/48) by [@khushalsagar](https://github.com/khushalsagar))
-- **Concurrent tool execution punted.** Depends on in-page agent API ([#51](https://github.com/webmachinelearning/webmcp/issues/51)) design. ([#47](https://github.com/webmachinelearning/webmcp/issues/47) by [@khushalsagar](https://github.com/khushalsagar))
-- **[`outputSchema`](https://webmachinelearning.github.io/webmcp/#dom-toolregistration-outputschema) added to imperative API.** Structured output definitions for tools. ([#9](https://github.com/webmachinelearning/webmcp/issues/9) by [@bokand](https://github.com/bokand))
-
-### Open Design Questions
-
-Active debates with no resolution yet:
-
-- **In-page agent execution API** — Should pages be able to call their own tools? `executeTool()` vs `createClient()`. ([#51](https://github.com/webmachinelearning/webmcp/issues/51) by [@khushalsagar](https://github.com/khushalsagar))
-- **WebExtensions API** — Dedicated extension API for tool enumeration/invocation without content script injection. ([#74](https://github.com/webmachinelearning/webmcp/issues/74) by [@reillyeon](https://github.com/reillyeon))
-- **Iframe tool registration** — Permission Policy vs Document Policy for cross-origin tool delegation. ([#57](https://github.com/webmachinelearning/webmcp/issues/57) by [@khushalsagar](https://github.com/khushalsagar))
-- **Declarative form mapping** — Radio buttons, multiple labels, date min/max constraints in JSON Schema. ([#63](https://github.com/webmachinelearning/webmcp/issues/63) by [@khushalsagar](https://github.com/khushalsagar), [#66](https://github.com/webmachinelearning/webmcp/issues/66), [#67](https://github.com/webmachinelearning/webmcp/issues/67), [#68](https://github.com/webmachinelearning/webmcp/issues/68), [#69](https://github.com/webmachinelearning/webmcp/issues/69) by [@andruud](https://github.com/andruud), [#71](https://github.com/webmachinelearning/webmcp/issues/71) by [@andruud](https://github.com/andruud))
-- **User gesture activation** — Should agent-invoked tool calls receive transient user activation? ([#62](https://github.com/webmachinelearning/webmcp/issues/62) by [@beaufortfrancois](https://github.com/beaufortfrancois))
-- **Concurrent multi-agent execution** — Multiple agents on same page; browser agent and extension agents interacting simultaneously. ([#49](https://github.com/webmachinelearning/webmcp/issues/49) by [@khushalsagar](https://github.com/khushalsagar))
-- **File attachments** — Supporting file uploads via imperative API. ([#81](https://github.com/webmachinelearning/webmcp/issues/81) by [@markafoltz](https://github.com/markafoltz))
-- **Streaming arguments** — Progressive delivery of tool arguments to execute callbacks. ([#82](https://github.com/webmachinelearning/webmcp/issues/82) by [@MiguelsPizza](https://github.com/MiguelsPizza))
-
-## Browser Support
-
-| Browser | Status | Version | How to Enable |
-|---|---|---|---|
-| **Chrome** | Early Preview | 146.0.7672.0+ (Canary) | `chrome://flags` → "WebMCP for testing" |
-| **Edge** | Expected | TBD | Same Chromium flag |
-| **Firefox** | Not yet | — | — |
-| **Safari** | Not yet | — | — |
-
-```javascript
-if ("modelContext" in navigator) {
-  // WebMCP is supported
-}
-```
+---
 
 ## Official Tooling
 
@@ -112,7 +44,6 @@ if ("modelContext" in navigator) {
 ## Framework Libraries
 
 - [@mcp-b/react-webmcp](https://www.npmjs.com/package/@mcp-b/react-webmcp) - React hooks (`useWebMCP`, `useMcpTool`) for registering and invoking WebMCP tools.
-- [wodiddfox/webmcp-excellent-core](https://github.com/wodiddfox/webmcp-excellent-core) - Production-grade WebMCP skill spec with strict scope boundaries, multi-tier confirmation gates, schema validation, deterministic output tracing, and structured fallback codes. [npm](https://www.npmjs.com/package/webmcp-excellent-core).
 
 ## Browser Extensions
 
@@ -133,49 +64,37 @@ if ("modelContext" in navigator) {
 - [wmcp.dev](https://www.wmcp.dev/) - WordPress plugin adding WebMCP [declarative](https://github.com/webmachinelearning/webmcp/pull/76) attributes ([`toolname`](https://github.com/webmachinelearning/webmcp/pull/76), [`tooldescription`](https://github.com/webmachinelearning/webmcp/pull/76)) to Contact Form 7, Gravity Forms, WPForms, and WooCommerce forms.
 - [chgold/wp-ai-connect](https://github.com/chgold/wp-ai-connect) - WordPress plugin exposing WebMCP REST API. AI agents authenticate via JWT and invoke tools like `wordpress.searchPosts` and `wordpress.getPost`.
 - [tuvit/webmcp](https://github.com/tuvit/webmcp) - Wix platform extension injecting WebMCP attributes into Wix Stores pages for AI agent access to e-commerce data.
-- [WispAyr/webmcp-integration](https://github.com/WispAyr/webmcp-integration) - Research and architecture for integrating WebMCP into the Clawdbot browser automation agent with 6-phase implementation roadmap and tool capability registry.
-- [shepherdvovkes/webmcp](https://github.com/shepherdvovkes/webmcp) - MCP server for the Ukrainian court registry with document monitoring, structured data extraction, semantic search via pgvector, and RAG-based case analysis.
 
 ## Demo Applications
 
-### Substantial Demos
-
-- [Travel Demo](https://travel-demo.bandarra.me/) - Official Chrome team demo using `searchFlights` tool via [imperative API](https://webmachinelearning.github.io/webmcp/#imperative-api). Part of the Chrome Early Preview docs.
+- [Travel Demo](https://travel-demo.bandarra.me/) - Official Chrome team demo using `searchFlights` tool via [imperative API](https://webmachinelearning.github.io/webmcp). Part of the Chrome Early Preview docs.
 - [Playground WebMCP](https://webmcp.sh/) - Interactive browser playground for connecting to MCP servers, running tools, and querying in-browser PostgreSQL. ([Source](https://github.com/WebMCP-org/webmcp-sh)).
 - [grzetich/webmcp-kanban](https://github.com/grzetich/webmcp-kanban) - React kanban board with 8 AI-callable tools (create, move, update, delete cards), drag-and-drop, and localStorage persistence. [Live demo](https://webmcp-kanban-demo.vercel.app).
 - [WebMCP-org/big-calendar](https://github.com/WebMCP-org/big-calendar) - Next.js calendar with 15 WebMCP tools for CRUD, navigation, and settings. Includes embedded AI agent via chat widget.
 - [WebMCP-org/ai-tinkerers-webmcp-demo](https://github.com/WebMCP-org/ai-tinkerers-webmcp-demo) - In-browser RAG pipeline with document ingestion, Transformers.js embeddings, Dexie/IndexedDB storage, and semantic search via WebMCP tools.
 - [Legit-Control/webMCP-exploration](https://github.com/Legit-Control/webMCP-exploration) - React app integrating WebMCP with Legit SDK for Git-like versioned state mutations. AI agents edit calendar in isolated branches with visual previews.
 - [SrinivasanTarget/WebMCP-demo](https://github.com/SrinivasanTarget/WebMCP-demo) - Full WebMCP polyfill demo with 15+ sample tools (math, DOM, storage, network) and an AI-agent simulator with JSON-RPC messaging.
-- [tsunoyu/webmcp-travel-insurance](https://github.com/tsunoyu/webmcp-travel-insurance) - Travel insurance app demonstrating complete policy lifecycle (quoting, purchasing, claims) via [`navigator.modelContext`](https://webmachinelearning.github.io/webmcp/#modelcontext) tools.
+- [tsunoyu/webmcp-travel-insurance](https://github.com/tsunoyu/webmcp-travel-insurance) - Travel insurance app demonstrating complete policy lifecycle (quoting, purchasing, claims) via [`navigator.modelContext`](https://webmachinelearning.github.io/webmcp) tools.
 - [Cycasio/medsyn-web](https://github.com/Cycasio/medsyn-web) - Living evidence synthesis database for medical research with WebMCP tools for searching RCT studies, retrieving GRADE evidence summaries, and submitting studies for review.
-- [marisviana/webmcp_demo-site](https://github.com/marisviana/webmcp_demo-site) - E-commerce demo with WebMCP tools for product filtering and cart management.
-- [ripulio/webmcp-tools](https://github.com/ripulio/webmcp-tools) - Catalog of production-ready WebMCP tool definitions with schemas, metadata, and build pipeline.
-
-### Minimal Demos
-
-- [khushalsagar/webmcp-demo](https://github.com/khushalsagar/webmcp-demo) - By the Chrome spec co-author ([@khushalsagar](https://github.com/khushalsagar)). Flight booking with both [declarative HTML](https://github.com/webmachinelearning/webmcp/pull/76) and [imperative JS](https://webmachinelearning.github.io/webmcp/#imperative-api) approaches.
-- [Doriandarko/webmcp-starter](https://github.com/Doriandarko/webmcp-starter) - Single-file "Midnight Eats" DoorDash-style demo with 9 tools (8 [imperative](https://webmachinelearning.github.io/webmcp/#imperative-api), 1 [declarative](https://github.com/webmachinelearning/webmcp/pull/76)) and zero dependencies.
-- [alecron/webmcp-demo](https://github.com/alecron/webmcp-demo) - Notes app with 5 tools (add, list, search, delete, stats) using [`navigator.modelContext.provideContext()`](https://webmachinelearning.github.io/webmcp/#modelcontext).
-- [best-seller/webmcp-demo](https://github.com/best-seller/webmcp-demo) - [Imperative](https://webmachinelearning.github.io/webmcp/#imperative-api) + [declarative API](https://github.com/webmachinelearning/webmcp/pull/76) examples for AI agent interaction.
+- [khushalsagar/webmcp-demo](https://github.com/khushalsagar/webmcp-demo) - By the Chrome spec co-author ([@khushalsagar](https://github.com/khushalsagar)). Flight booking with both [declarative HTML](https://github.com/webmachinelearning/webmcp/pull/76) and [imperative JS](https://webmachinelearning.github.io/webmcp) approaches.
+- [Doriandarko/webmcp-starter](https://github.com/Doriandarko/webmcp-starter) - Single-file "Midnight Eats" DoorDash-style demo with 9 tools (8 [imperative](https://webmachinelearning.github.io/webmcp), 1 [declarative](https://github.com/webmachinelearning/webmcp/pull/76)) and zero dependencies.
+- [alecron/webmcp-demo](https://github.com/alecron/webmcp-demo) - Notes app with 5 tools (add, list, search, delete, stats) using [`navigator.modelContext.provideContext()`](https://webmachinelearning.github.io/webmcp).
 - [alanw707/webmcp-readiness-radar](https://github.com/alanw707/webmcp-readiness-radar) - Web app scoring a site's WebMCP agent-readiness with pillar-wise breakdown and recommendations.
-- [pawn-4-git/webmcp_test](https://github.com/pawn-4-git/webmcp_test) - Product review extraction demo using a `getProductReviews` WebMCP tool.
 
 ## Starter Templates & Courses
 
-- [CodelyTV/webmcp-course](https://github.com/CodelyTV/webmcp-course) - Course examples for both [declarative](https://github.com/webmachinelearning/webmcp/pull/76) (`toolname`/`tooldescription` attributes) and [imperative](https://webmachinelearning.github.io/webmcp/#imperative-api) (`navigator.modelContext`) APIs. Tied to [Codely Pro Spanish course](https://pro.codely.com/library/webmcp-anade-capacidades-agenticas-a-tu-web).
+- [CodelyTV/webmcp-course](https://github.com/CodelyTV/webmcp-course) - Course examples for both [declarative](https://github.com/webmachinelearning/webmcp/pull/76) (`toolname`/`tooldescription` attributes) and [imperative](https://webmachinelearning.github.io/webmcp) (`navigator.modelContext`) APIs. Tied to [Codely Pro Spanish course](https://pro.codely.com/library/webmcp-anade-capacidades-agenticas-a-tu-web).
 - [taqm/webmcp-sample](https://github.com/taqm/webmcp-sample) - Next.js + TypeScript starter template with Bun runtime, Biome linting, and Git hooks.
-- [lemonhall/webmcp_readme](https://github.com/lemonhall/webmcp_readme) - Guide and explanation of WebMCP with practical React flight search demo.
 - [opentiny/docs](https://github.com/opentiny/docs) - Unified VitePress documentation for the OpenTiny NEXT ecosystem covering `WebMcpClient`, `WebMcpServer`, MCP browser extensions, and related projects.
 
 ## Articles & Tutorials
 
 ### Overviews
 
-- [Chrome's WebMCP Early Preview: The End of AI Agents Clicking Buttons](https://dev.to/axrisi/chromes-webmcp-early-preview-the-end-of-ai-agents-clicking-buttons-b6e) - Third-party walkthrough covering both [imperative](https://webmachinelearning.github.io/webmcp/#imperative-api) and [declarative](https://github.com/webmachinelearning/webmcp/pull/76) APIs, events, CSS pseudo-classes, and best practices.
+- [Chrome's WebMCP Early Preview: The End of AI Agents Clicking Buttons](https://dev.to/axrisi/chromes-webmcp-early-preview-the-end-of-ai-agents-clicking-buttons-b6e) - Third-party walkthrough covering both [imperative](https://webmachinelearning.github.io/webmcp) and [declarative](https://github.com/webmachinelearning/webmcp/pull/76) APIs, events, CSS pseudo-classes, and best practices.
 - [What is WebMCP? Your Website Just Became a Function Call](https://www.nohackspod.com/blog/what-is-webmcp) - Explainer comparing WebMCP vs server-side approaches, covering [declarative HTML](https://github.com/webmachinelearning/webmcp/pull/76).
 - [WebMCP (Dejan AI)](https://dejan.ai/blog/webmcp/) - SEO-focused analysis of tool descriptions as the next indexing problem.
-- [WebMCP: Making the Web AI-Agent Ready](https://dev.to/sunny7899/webmcp-making-the-web-ai-agent-ready-5152) - Introduction with code samples for `registerTool`, [`provideContext`](https://webmachinelearning.github.io/webmcp/#modelcontext), and [declarative forms](https://github.com/webmachinelearning/webmcp/pull/76).
+- [WebMCP: Making the Web AI-Agent Ready](https://dev.to/sunny7899/webmcp-making-the-web-ai-agent-ready-5152) - Introduction with code samples for `registerTool`, [`provideContext`](https://webmachinelearning.github.io/webmcp), and [declarative forms](https://github.com/webmachinelearning/webmcp/pull/76).
 
 ### Technical Deep-Dives
 
@@ -236,11 +155,6 @@ The [Security and Privacy Considerations](https://github.com/webmachinelearning/
 - Update UI after execution — agents verify state via DOM.
 - Use [`toolautosubmit`](https://github.com/webmachinelearning/webmcp/pull/76) only for idempotent operations.
 
-## Automation
-
-- [joellobo1234/webmcp-monthly-roundup-gh-action](https://github.com/joellobo1234/webmcp-monthly-roundup-gh-action) - GitHub Action generating monthly newsletter roundups of WebMCP repo activity with auto-publish to GitHub Discussions and contributor recognition.
-- [alanw707/daily-mvp-2026-02-13-webmcp-readiness-radar](https://github.com/alanw707/daily-mvp-2026-02-13-webmcp-readiness-radar) - Daily MVP iteration of the Readiness Radar with site-type-aware scoring (SaaS, e-commerce, media, marketplace).
-
 ## Community
 
 - [W3C Web Machine Learning CG](https://www.w3.org/community/webmachinelearning/) - The W3C Community Group developing the WebMCP specification ([charter](https://webmachinelearning.github.io/charter/)). Open for anyone to join.
@@ -249,17 +163,85 @@ The [Security and Privacy Considerations](https://github.com/webmachinelearning/
 - [Chrome AI Dev Preview Group](https://groups.google.com/a/chromium.org/g/chrome-ai-dev-preview-discuss/) - Official Google discussion group for Chrome AI features including WebMCP.
 - [GitHub Issues](https://github.com/webmachinelearning/webmcp/issues) - Primary venue for async technical discussion and spec feedback.
 - [Bug Reports](https://crbug.com/new?component=2021259) - Chrome implementation bug reports.
+- [Automation: webmcp-monthly-roundup](https://github.com/joellobo1234/webmcp-monthly-roundup-gh-action) - GitHub Action generating monthly newsletter roundups of WebMCP repo activity.
 - [r/HowToAIAgent](https://www.reddit.com/r/HowToAIAgent/comments/1r36bec/webmcp_just_dropped_in_chrome_146_and_now_your/) - Chrome 146 launch discussion.
 - [r/ClaudeCode](https://www.reddit.com/r/ClaudeCode/comments/1r2m8cw/chromes_webmcp_makes_ai_agents_stop_pretending/) - Developer reactions.
+
+---
+
+## Specification
+
+### Browser Support
+
+| Browser | Status | Version | How to Enable |
+|---|---|---|---|
+| **Chrome** | Early Preview | 146.0.7672.0+ (Canary) | `chrome://flags` → "WebMCP for testing" |
+| **Edge** | Expected | TBD | Same Chromium flag |
+| **Firefox** | Not yet | — | — |
+| **Safari** | Not yet | — | — |
+
+```javascript
+if ("modelContext" in navigator) {
+  // WebMCP is supported
+}
+```
+
+### Spec Documents
+
+| Document | Link | Description |
+|---|---|---|
+| **Normative Spec** | [webmachinelearning.github.io/webmcp](https://webmachinelearning.github.io/webmcp) | Full spec: [`navigator.modelContext`](https://webmachinelearning.github.io/webmcp#navigator.modelContext), [`registerTool()`](https://webmachinelearning.github.io/webmcp#registerTool), [`provideContext()`](https://webmachinelearning.github.io/webmcp#provideContext), events, CSS pseudo-classes |
+| **Source Repo** | [webmachinelearning/webmcp](https://github.com/webmachinelearning/webmcp) | Bikeshed spec, explainers, [security/privacy docs](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md), issue tracker |
+| **Chrome Early Preview** | [developer.chrome.com](https://developer.chrome.com/blog/webmcp-epp) | Setup instructions, API overview, demo walkthrough |
+| **Declarative API Explainer** | [PR #76](https://github.com/webmachinelearning/webmcp/pull/76) | HTML form-based tools: [`toolname`](https://github.com/webmachinelearning/webmcp/pull/76), [`tooldescription`](https://github.com/webmachinelearning/webmcp/pull/76), [`toolautosubmit`](https://github.com/webmachinelearning/webmcp/pull/76) |
+| **Service Workers** | [service-workers.md](https://github.com/webmachinelearning/webmcp/blob/main/docs/service-workers.md) | Background tool execution without a visible tab |
+| **Security & Privacy** | [security-privacy.md](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md) | [Prompt injection](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#prompt-injection), [misrepresentation](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#misrepresentation), [over-parameterization](https://github.com/webmachinelearning/webmcp/blob/main/docs/security-privacy.md#privacy-leakage) |
+| **Deep Discussion Analysis** | [docs/spec-discussions/](docs/spec-discussions/) | All 55 issues + 20 PRs analyzed by theme |
+
+### Key Spec Issues
+
+| Topic | Issue | Author | Status |
+|---|---|---|---|
+| Accessibility via agentic interfaces | [#65](https://github.com/webmachinelearning/webmcp/issues/65) | [@anssiko](https://github.com/anssiko) | Open |
+| In-page agent API (`executeTool` vs `createClient`) | [#51](https://github.com/webmachinelearning/webmcp/issues/51) | [@khushalsagar](https://github.com/khushalsagar) | Open |
+| Elicitation / `requestUserInteraction` | [#21](https://github.com/webmachinelearning/webmcp/issues/21) | [@bwalderman](https://github.com/bwalderman) | Resolved |
+| Tool annotations & side-effect hints | [#53](https://github.com/webmachinelearning/webmcp/issues/53) | [@victorhuangwq](https://github.com/victorhuangwq) | Open |
+| Agent identity | [#54](https://github.com/webmachinelearning/webmcp/issues/54) | [@EmLauber](https://github.com/EmLauber) | Deferred |
+| WebExtensions API | [#74](https://github.com/webmachinelearning/webmcp/issues/74) | [@reillyeon](https://github.com/reillyeon) | Open |
+| Iframe tool registration | [#57](https://github.com/webmachinelearning/webmcp/issues/57) | [@khushalsagar](https://github.com/khushalsagar) | Open |
+| User gesture activation | [#62](https://github.com/webmachinelearning/webmcp/issues/62) | [@beaufortfrancois](https://github.com/beaufortfrancois) | Open |
+| File attachments | [#81](https://github.com/webmachinelearning/webmcp/issues/81) | [@markafoltz](https://github.com/markafoltz) | Open |
+| Streaming arguments | [#82](https://github.com/webmachinelearning/webmcp/issues/82) | [@MiguelsPizza](https://github.com/MiguelsPizza) | Open |
+| Scope clarification | [#43](https://github.com/webmachinelearning/webmcp/issues/43) | — | Open |
+
+### Key Resolutions
+
+Formal decisions from W3C CG meetings ([minutes archive](https://github.com/webmachinelearning/meetings)):
+
+| Date | Resolution | Issue |
+|---|---|---|
+| Sep 2025 | **Human-in-the-loop first.** Automation deferred until security model matures. | [#27](https://github.com/webmachinelearning/webmcp/issues/27) |
+| Sep 2025 | **SDK abstraction.** Browser translates between page and MCP client; decoupled from MCP version. | [#32](https://github.com/webmachinelearning/webmcp/issues/32) |
+| Oct 2025 | **`navigator.modelContext`** is the root object name. | [#24](https://github.com/webmachinelearning/webmcp/issues/24) |
+| Oct 2025 | **Tools as discovery.** Declarative API enables crawling/indexing without JS. | [#8](https://github.com/webmachinelearning/webmcp/issues/8) |
+| Oct 2025 | **Both [`provideContext()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-providecontext) and [`registerTool()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-registertool)** supported. | [#15](https://github.com/webmachinelearning/webmcp/issues/15) |
+| Oct 2025 | **No JS injection** by external agents. Extension API / CDP preferred. | [#16](https://github.com/webmachinelearning/webmcp/issues/16) |
+| Oct 2025 | **[`requestUserInteraction()`](https://webmachinelearning.github.io/webmcp/#dom-navigatormodelcontext-requestuserinteraction)** for elicitation. Block abusive sites permanently. | [#21](https://github.com/webmachinelearning/webmcp/issues/21) |
+| Oct 2025 | **No user-takeover notification** needed. Elicitation handles it. | [#20](https://github.com/webmachinelearning/webmcp/issues/20) |
+| Nov 2025 | **TAG endorsement.** Continue as high-level API. Coordinate with AI Agent Protocol CG. | [#35](https://github.com/webmachinelearning/webmcp/issues/35) |
+| Nov 2025 | **Cross-origin scoped out of v1.** Same-origin tool registration only. | [#52](https://github.com/webmachinelearning/webmcp/issues/52) |
+| Nov 2025 | **Agent identity deferred.** No clear v1 need. | [#54](https://github.com/webmachinelearning/webmcp/issues/54) |
+| Jan 2026 | **Declarative complements imperative.** HTML form attributes + JS API. | [PR #26](https://github.com/webmachinelearning/webmcp/pull/26) |
+| Jan 2026 | **[`AbortSignal`](https://webmachinelearning.github.io/webmcp/#dom-executetoolparams) for cancellation.** Tool callbacks receive abort signal. | [#48](https://github.com/webmachinelearning/webmcp/issues/48) |
+| Jan 2026 | **Concurrent execution punted.** Depends on in-page agent API design. | [#47](https://github.com/webmachinelearning/webmcp/issues/47) |
+| Feb 2026 | **[`outputSchema`](https://webmachinelearning.github.io/webmcp/#dom-toolregistration-outputschema) added.** Structured output definitions for tools. | [#9](https://github.com/webmachinelearning/webmcp/issues/9) |
 
 ## API Quick Reference
 
 ### [Imperative API](https://webmachinelearning.github.io/webmcp)
 
-See the [spec](https://webmachinelearning.github.io/webmcp) for detailed Imperative API documentation.
-
 ```javascript
-// Register a single tool - decided in #15 (https://github.com/webmachinelearning/webmcp/issues/15)
+// Register a tool (#15)
 navigator.modelContext.registerTool({
   name: "searchFlights",
   description: "Search for available flights between two airports",
@@ -272,32 +254,27 @@ navigator.modelContext.registerTool({
     },
     required: ["origin", "destination", "date"]
   },
-  // readOnlyHint annotations - see #53 (https://github.com/webmachinelearning/webmcp/issues/53)
-  annotations: { readOnlyHint: true },
+  annotations: { readOnlyHint: true },  // #53
   execute: async ({ origin, destination, date }) => {
     const results = await searchFlightsAPI(origin, destination, date);
     return { content: [{ type: "text", text: JSON.stringify(results) }] };
   }
 });
 
-// Replace all tools - provideContext API from #15 (https://github.com/webmachinelearning/webmcp/issues/15)
+// Replace all tools (#15)
 navigator.modelContext.provideContext({ tools: [/* ... */] });
 
-// Remove one tool / all tools - unregisterTool #15, clearContext per spec
+// Remove tools
 navigator.modelContext.unregisterTool("searchFlights");
 navigator.modelContext.clearContext();
 ```
 
 ### [Declarative API](https://github.com/webmachinelearning/webmcp/pull/76)
 
-See [PR #76](https://github.com/webmachinelearning/webmcp/pull/76) for Declarative API Explainer.
-
 ```html
-<!-- toolname, tooldescription, toolautosubmit attributes - PR #76 -->
 <form toolname="book_table"
       tooldescription="Reserve a table at this restaurant"
       toolautosubmit action="/api/reserve">
-  <!-- toolparamdescription attribute - PR #76 -->
   <input type="date" name="date" required toolparamdescription="Reservation date">
   <input type="time" name="time" required toolparamdescription="Reservation time">
   <input type="number" name="guests" min="1" max="20" required>
@@ -307,11 +284,8 @@ See [PR #76](https://github.com/webmachinelearning/webmcp/pull/76) for Declarati
 
 ### [Events & CSS](https://webmachinelearning.github.io/webmcp)
 
-See the [spec](https://webmachinelearning.github.io/webmcp) for events and CSS pseudo-classes.
-
 ```javascript
 form.addEventListener("submit", (e) => {
-  // agentInvoked property - defined in spec
   if (e.agentInvoked) {
     e.preventDefault();
     e.respondWith(handleAgentSubmission(e));
@@ -323,18 +297,14 @@ window.addEventListener('toolcancel', ({ toolName }) => { /* ... */ });
 ```
 
 ```css
-/* :tool-form-active and :tool-submit-active pseudo-classes - per spec */
 form:tool-form-active { outline: 2px solid #4CAF50; }
 button:tool-submit-active { background: #FFD700; }
 ```
 
 ### [User Interaction](https://github.com/webmachinelearning/webmcp/issues/21)
 
-See [#21](https://github.com/webmachinelearning/webmcp/issues/21) for elicitation and user interaction support.
-
 ```javascript
 execute: async ({ productId }, agent) => {
-  // requestUserInteraction API - see #21 (https://github.com/webmachinelearning/webmcp/issues/21)
   const ok = await agent.requestUserInteraction(async () => {
     return confirm(`Purchase ${productId}?`);
   });
@@ -347,24 +317,21 @@ execute: async ({ productId }, agent) => {
 
 | Person | Affiliation | Role | Links |
 |---|---|---|---|
-| **Anssi Kostiainen** | W3C / Intel | CG Chair, manages process, coordinates with TAG and AAIF ([#35](https://github.com/webmachinelearning/webmcp/issues/35)), a11y meta ([#65](https://github.com/webmachinelearning/webmcp/issues/65)), spec draft ([PR #64](https://github.com/webmachinelearning/webmcp/pull/64)), acks ([PR #72](https://github.com/webmachinelearning/webmcp/pull/72)), WebIDL conversion ([PR #75](https://github.com/webmachinelearning/webmcp/pull/75)), API syntax updates ([PR #37](https://github.com/webmachinelearning/webmcp/pull/37)), MCP intersection ([PR #46](https://github.com/webmachinelearning/webmcp/pull/46)), service workers ([PR #19](https://github.com/webmachinelearning/webmcp/pull/19)) | [GitHub](https://github.com/anssiko) |
-| **Brandon Walderman** | Microsoft | Spec co-author, initial explainer ([PR #1](https://github.com/webmachinelearning/webmcp/pull/1)), service worker proposal ([PR #4](https://github.com/webmachinelearning/webmcp/pull/4)), elicitation design ([#21](https://github.com/webmachinelearning/webmcp/issues/21)), global naming ([#24](https://github.com/webmachinelearning/webmcp/issues/24)), API design ([#15](https://github.com/webmachinelearning/webmcp/issues/15)), prompt injection ([#11](https://github.com/webmachinelearning/webmcp/issues/11)), ARIA reuse analysis ([#63 comment](https://github.com/webmachinelearning/webmcp/issues/63)) | [GitHub](https://github.com/bwalderman) · [LinkedIn](https://www.linkedin.com/in/brandonwalderman) |
-| **Andrew Nolan** | Microsoft | Spec co-author | [LinkedIn](https://www.linkedin.com/in/andrewnolanaiproductleader) |
-| **David Bokan** | Google | Spec co-author, capability discovery ([#8](https://github.com/webmachinelearning/webmcp/issues/8)), output schema ([#9](https://github.com/webmachinelearning/webmcp/issues/9)), external agents ([#16](https://github.com/webmachinelearning/webmcp/issues/16)), typo fix ([PR #34](https://github.com/webmachinelearning/webmcp/pull/34)) | [GitHub](https://github.com/bokand) |
-| **Khushal Sagar** | Google | Spec co-author, Chrome implementation lead, SDK abstraction ([#32](https://github.com/webmachinelearning/webmcp/issues/32)), `createClient` proposal ([#51](https://github.com/webmachinelearning/webmcp/issues/51)), MCP intersection doc ([PR #36](https://github.com/webmachinelearning/webmcp/pull/36)), iframe tools ([#57](https://github.com/webmachinelearning/webmcp/issues/57)), tool side-effects ([#53](https://github.com/webmachinelearning/webmcp/issues/53)), cross-origin scope ([#52](https://github.com/webmachinelearning/webmcp/issues/52)), human-in-the-loop ([#27](https://github.com/webmachinelearning/webmcp/issues/27)), concurrent execution ([#47](https://github.com/webmachinelearning/webmcp/issues/47)), multi-agent ([#49](https://github.com/webmachinelearning/webmcp/issues/49)), AbortSignal ([#48](https://github.com/webmachinelearning/webmcp/issues/48)), form mapping ([#63](https://github.com/webmachinelearning/webmcp/issues/63)) | [GitHub](https://github.com/khushalsagar) · [LinkedIn](https://www.linkedin.com/in/khushal-sagar) |
-| **Hannah Van Opstal** | Google | Spec co-author | [LinkedIn](https://ca.linkedin.com/in/hannah-van-opstal) |
-| **Dominic Farolino** | Google | Spec editor, declarative API explainer ([PR #76](https://github.com/webmachinelearning/webmcp/pull/76)), `Accept: application/json` analysis ([PR #26 comment](https://github.com/webmachinelearning/webmcp/pull/26)), Permission Policy for iframes ([#57 comment](https://github.com/webmachinelearning/webmcp/issues/57)) | [GitHub](https://github.com/domfarolino) · [LinkedIn](https://www.linkedin.com/in/domfarolino) · [X](https://x.com/domfarolino) |
-| **Victor Huang** | Google | Security & Privacy considerations ([PR #55](https://github.com/webmachinelearning/webmcp/pull/55), [PR #59](https://github.com/webmachinelearning/webmcp/pull/59)), threat model ([#45](https://github.com/webmachinelearning/webmcp/issues/45)), tool annotations ([#53](https://github.com/webmachinelearning/webmcp/issues/53)), agent identity ([#54](https://github.com/webmachinelearning/webmcp/issues/54)), Document Policy for iframes ([#57 comment](https://github.com/webmachinelearning/webmcp/issues/57)), WebBotAuth reference ([#54 comment](https://github.com/webmachinelearning/webmcp/issues/54)) | [GitHub](https://github.com/victorhuangwq) |
-| **Mark Foltz** | Google | Spec editor, file attachments ([#81](https://github.com/webmachinelearning/webmcp/issues/81)), streaming arguments ([#82](https://github.com/webmachinelearning/webmcp/issues/82)), Bikeshed build system ([PR #77](https://github.com/webmachinelearning/webmcp/pull/77), [PR #78](https://github.com/webmachinelearning/webmcp/pull/78), [PR #79](https://github.com/webmachinelearning/webmcp/pull/79), [PR #80](https://github.com/webmachinelearning/webmcp/pull/80)) | [GitHub](https://github.com/markafoltz) |
-| **Reilly Grant** | Google | WebExtensions API proposal ([#74](https://github.com/webmachinelearning/webmcp/issues/74)), `navigator` placement advocacy ([#24 comment](https://github.com/webmachinelearning/webmcp/issues/24)), component coordination concern ([#15 comment](https://github.com/webmachinelearning/webmcp/issues/15)), `modelContextTesting` mention ([#74 comment](https://github.com/webmachinelearning/webmcp/issues/74)) | [GitHub](https://github.com/reillyeon) |
-| **Anders Ruud** | Google | Declarative API deep dive — forms, radio buttons, labels ([#66](https://github.com/webmachinelearning/webmcp/issues/66), [#67](https://github.com/webmachinelearning/webmcp/issues/67), [#68](https://github.com/webmachinelearning/webmcp/issues/68), [#69](https://github.com/webmachinelearning/webmcp/issues/69), [#71](https://github.com/webmachinelearning/webmcp/issues/71)) | [GitHub](https://github.com/andruud) |
-| **Francois Beaufort** | Google | Chrome Early Preview author, user gesture activation ([#62](https://github.com/webmachinelearning/webmcp/issues/62)), `navigator.modelContextTesting` interim API ([#74 comment](https://github.com/webmachinelearning/webmcp/issues/74)), JS examples ([PR #61](https://github.com/webmachinelearning/webmcp/pull/61)) | [GitHub](https://github.com/beaufortfrancois) |
-| **Alexandra Klepper** | Google | Chrome Early Preview author | [LinkedIn](https://www.linkedin.com/in/alexandraklepper) · [Mastodon](https://mstdn.social/@alexandrawhite) |
-| **Andre Bandarra** | Google | Chrome Early Preview author, [travel demo](https://travel-demo.bandarra.me/) | [GitHub](https://github.com/andreban) · [LinkedIn](https://uk.linkedin.com/in/andreban) · [X](https://x.com/andreban) · [Blog](https://bandarra.me/) |
-| **Alex Nahas** | Amazon (prev.) | Original WebMCP concept, [MCP-B](https://mcp-b.ai) creator, declarative HTML proposal ([PR #26](https://github.com/webmachinelearning/webmcp/pull/26)), async registration ([#30](https://github.com/webmachinelearning/webmcp/issues/30)), streaming arguments ([#82 comment](https://github.com/webmachinelearning/webmcp/issues/82)) | [GitHub](https://github.com/MiguelsPizza) · [LinkedIn](https://www.linkedin.com/in/alex-nahas) |
-| **Jason McGhee** | Independent | Early WebMCP implementation, external MCP client API ([#23](https://github.com/webmachinelearning/webmcp/issues/23)) | [GitHub](https://github.com/jasonjmcghee) · [LinkedIn](https://www.linkedin.com/in/jasonjmcghee) · [X](https://x.com/_jason_today) |
-| **Ilya Grigorik** | Shopify | Commerce perspective, agent-to-agent interaction ([#31](https://github.com/webmachinelearning/webmcp/issues/31)) | [GitHub](https://github.com/igrigorik) |
-| **Leonie Watson** | TPGi | Accessibility expert, screen reader perspective ([#65 comment](https://github.com/webmachinelearning/webmcp/issues/65)) | [GitHub](https://github.com/LJWatson) |
+| **Anssi Kostiainen** | W3C / Intel | CG Chair, coordinates with TAG and AAIF ([#35](https://github.com/webmachinelearning/webmcp/issues/35)), spec draft ([PR #64](https://github.com/webmachinelearning/webmcp/pull/64)), WebIDL ([PR #75](https://github.com/webmachinelearning/webmcp/pull/75)) | [GitHub](https://github.com/anssiko) |
+| **Brandon Walderman** | Microsoft | Spec co-author, initial explainer ([PR #1](https://github.com/webmachinelearning/webmcp/pull/1)), service workers ([PR #4](https://github.com/webmachinelearning/webmcp/pull/4)), elicitation ([#21](https://github.com/webmachinelearning/webmcp/issues/21)), naming ([#24](https://github.com/webmachinelearning/webmcp/issues/24)), API design ([#15](https://github.com/webmachinelearning/webmcp/issues/15)) | [GitHub](https://github.com/bwalderman) · [LinkedIn](https://www.linkedin.com/in/brandonwalderman) |
+| **David Bokan** | Google | Spec co-author, discovery ([#8](https://github.com/webmachinelearning/webmcp/issues/8)), output schema ([#9](https://github.com/webmachinelearning/webmcp/issues/9)), external agents ([#16](https://github.com/webmachinelearning/webmcp/issues/16)) | [GitHub](https://github.com/bokand) |
+| **Khushal Sagar** | Google | Spec co-author, Chrome lead, SDK ([#32](https://github.com/webmachinelearning/webmcp/issues/32)), `createClient` ([#51](https://github.com/webmachinelearning/webmcp/issues/51)), iframes ([#57](https://github.com/webmachinelearning/webmcp/issues/57)), annotations ([#53](https://github.com/webmachinelearning/webmcp/issues/53)), scope ([#52](https://github.com/webmachinelearning/webmcp/issues/52)), concurrency ([#47](https://github.com/webmachinelearning/webmcp/issues/47), [#49](https://github.com/webmachinelearning/webmcp/issues/49)) | [GitHub](https://github.com/khushalsagar) · [LinkedIn](https://www.linkedin.com/in/khushal-sagar) |
+| **Dominic Farolino** | Google | Spec editor, declarative explainer ([PR #76](https://github.com/webmachinelearning/webmcp/pull/76)), iframe policy ([#57](https://github.com/webmachinelearning/webmcp/issues/57)) | [GitHub](https://github.com/domfarolino) · [LinkedIn](https://www.linkedin.com/in/domfarolino) · [X](https://x.com/domfarolino) |
+| **Victor Huang** | Google | Security & Privacy ([PR #55](https://github.com/webmachinelearning/webmcp/pull/55), [PR #59](https://github.com/webmachinelearning/webmcp/pull/59)), threat model ([#45](https://github.com/webmachinelearning/webmcp/issues/45)), annotations ([#53](https://github.com/webmachinelearning/webmcp/issues/53)), identity ([#54](https://github.com/webmachinelearning/webmcp/issues/54)) | [GitHub](https://github.com/victorhuangwq) |
+| **Mark Foltz** | Google | Spec editor, file attachments ([#81](https://github.com/webmachinelearning/webmcp/issues/81)), streaming ([#82](https://github.com/webmachinelearning/webmcp/issues/82)), build system ([PR #77](https://github.com/webmachinelearning/webmcp/pull/77)–[#80](https://github.com/webmachinelearning/webmcp/pull/80)) | [GitHub](https://github.com/markafoltz) |
+| **Reilly Grant** | Google | WebExtensions API ([#74](https://github.com/webmachinelearning/webmcp/issues/74)), `navigator` placement ([#24](https://github.com/webmachinelearning/webmcp/issues/24)), component coordination ([#15](https://github.com/webmachinelearning/webmcp/issues/15)) | [GitHub](https://github.com/reillyeon) |
+| **Anders Ruud** | Google | Declarative deep dive — forms, radio buttons, labels ([#66](https://github.com/webmachinelearning/webmcp/issues/66)–[#69](https://github.com/webmachinelearning/webmcp/issues/69), [#71](https://github.com/webmachinelearning/webmcp/issues/71)) | [GitHub](https://github.com/andruud) |
+| **Francois Beaufort** | Google | Chrome Early Preview, user gesture activation ([#62](https://github.com/webmachinelearning/webmcp/issues/62)), `modelContextTesting` ([#74](https://github.com/webmachinelearning/webmcp/issues/74)), JS examples ([PR #61](https://github.com/webmachinelearning/webmcp/pull/61)) | [GitHub](https://github.com/beaufortfrancois) |
+| **Andre Bandarra** | Google | Chrome Early Preview, [travel demo](https://travel-demo.bandarra.me/) | [GitHub](https://github.com/andreban) · [X](https://x.com/andreban) · [Blog](https://bandarra.me/) |
+| **Alex Nahas** | Amazon (prev.) | Original WebMCP concept, [MCP-B](https://mcp-b.ai) creator, declarative proposal ([PR #26](https://github.com/webmachinelearning/webmcp/pull/26)), async registration ([#30](https://github.com/webmachinelearning/webmcp/issues/30)) | [GitHub](https://github.com/MiguelsPizza) · [LinkedIn](https://www.linkedin.com/in/alex-nahas) |
+| **Jason McGhee** | Independent | Early WebMCP implementation, external MCP client API ([#23](https://github.com/webmachinelearning/webmcp/issues/23)) | [GitHub](https://github.com/jasonjmcghee) · [X](https://x.com/_jason_today) |
+| **Ilya Grigorik** | Shopify | Commerce perspective, agent-to-agent ([#31](https://github.com/webmachinelearning/webmcp/issues/31)) | [GitHub](https://github.com/igrigorik) |
+| **Leonie Watson** | TPGi | Accessibility expert, screen readers ([#65](https://github.com/webmachinelearning/webmcp/issues/65)) | [GitHub](https://github.com/LJWatson) |
 
 ## Contributing
 
