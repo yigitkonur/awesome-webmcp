@@ -41,6 +41,7 @@
 - [opentiny/next-sdk](https://github.com/opentiny/next-sdk) - Frontend AI SDK with `WebMcpServer`/`WebMcpClient` classes, transport adapters (MessageChannel, SSE, HTTP), Zod validation, and Vue 3 chat UI component.
 - [jasonjmcghee/WebMCP](https://github.com/jasonjmcghee/WebMCP) - Early WebMCP prototype by [@jasonjmcghee](https://github.com/jasonjmcghee) with client-side widget and localhost WebSocket bridge. NPM package and Docker support. Pre-dates the W3C spec; not spec-compliant.
 
+- [webmcp-sdk](https://github.com/up2itnow/webmcp-sdk) ([npm](https://www.npmjs.com/package/webmcp-sdk)) - Full TypeScript developer toolkit for making websites agent-ready via WebMCP. Includes core, React, security, and testing packages.
 ## Framework Libraries
 
 - [@mcp-b/react-webmcp](https://www.npmjs.com/package/@mcp-b/react-webmcp) - React hooks (`useWebMCP`, `useMcpTool`) for registering and invoking WebMCP tools.
