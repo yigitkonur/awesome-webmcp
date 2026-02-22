@@ -16,6 +16,7 @@
 - [CMS & Platform Integrations](#cms--platform-integrations)
 - [Demo Applications](#demo-applications)
 - [Starter Templates & Courses](#starter-templates--courses)
+- [Analysis & Readiness Tools](#analysis--readiness-tools)
 - [Articles & Tutorials](#articles--tutorials)
 - [Videos & Talks](#videos--talks)
 - [Security Resources](#security-resources)
@@ -86,6 +87,10 @@
 - [CodelyTV/webmcp-course](https://github.com/CodelyTV/webmcp-course) - Course examples for both [declarative](https://github.com/webmachinelearning/webmcp/pull/76) (`toolname`/`tooldescription` attributes) and [imperative](https://webmachinelearning.github.io/webmcp) (`navigator.modelContext`) APIs. Tied to [Codely Pro Spanish course](https://pro.codely.com/library/webmcp-anade-capacidades-agenticas-a-tu-web).
 - [taqm/webmcp-sample](https://github.com/taqm/webmcp-sample) - Next.js + TypeScript starter template with Bun runtime, Biome linting, and Git hooks.
 - [opentiny/docs](https://github.com/opentiny/docs) - Unified VitePress documentation for the OpenTiny NEXT ecosystem covering `WebMcpClient`, `WebMcpServer`, MCP browser extensions, and related projects.
+
+## Analysis & Readiness Tools
+
+- [AI Agent Readiness Scanner](https://scanner.v1be.codes) ([source](https://github.com/ckorhonen/ai-agent-scanner)) - Free tool to score any website's AI agent readiness across 6 categories: WebMCP support, semantic HTML, structured data, llms.txt, crawlability, and content quality. Returns a grade (A–F), a 5-level readiness label (Invisible → AI-Native), per-check fix instructions with code examples, and supports side-by-side competitor comparison.
 
 ## Articles & Tutorials
 
