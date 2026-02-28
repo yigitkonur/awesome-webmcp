@@ -62,6 +62,7 @@
 ## CMS & Platform Integrations
 
 - [wmcp.dev](https://www.wmcp.dev/) - WordPress plugin adding WebMCP [declarative](https://github.com/webmachinelearning/webmcp/pull/76) attributes ([`toolname`](https://github.com/webmachinelearning/webmcp/pull/76), [`tooldescription`](https://github.com/webmachinelearning/webmcp/pull/76)) to Contact Form 7, Gravity Forms, WPForms, and WooCommerce forms.
+- [code-atlantic/webmcp-abilities](https://github.com/code-atlantic/webmcp-abilities) - WordPress plugin bridging the Abilities API to `navigator.modelContext.registerTool()`, exposing any registered ability as a structured tool for AI agents in Chrome 146+.
 - [chgold/wp-ai-connect](https://github.com/chgold/wp-ai-connect) - WordPress plugin exposing WebMCP REST API. AI agents authenticate via JWT and invoke tools like `wordpress.searchPosts` and `wordpress.getPost`.
 - [tuvit/webmcp](https://github.com/tuvit/webmcp) - Wix platform extension injecting WebMCP attributes into Wix Stores pages for AI agent access to e-commerce data.
 
