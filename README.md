@@ -167,6 +167,7 @@ The [Security and Privacy Considerations](https://github.com/webmachinelearning/
 - [Automation: webmcp-monthly-roundup](https://github.com/joellobo1234/webmcp-monthly-roundup-gh-action) - GitHub Action generating monthly newsletter roundups of WebMCP repo activity.
 - [r/HowToAIAgent](https://www.reddit.com/r/HowToAIAgent/comments/1r36bec/webmcp_just_dropped_in_chrome_146_and_now_your/) - Chrome 146 launch discussion.
 - [r/ClaudeCode](https://www.reddit.com/r/ClaudeCode/comments/1r2m8cw/chromes_webmcp_makes_ai_agents_stop_pretending/) - Developer reactions.
+- [WebMCP List](https://webmcplist.com) - Open directory of WebMCP-enabled websites with search, category browsing, and community submissions. Itself WebMCP-enabled with 4 tools for AI agent discovery.
 
 ---
 
