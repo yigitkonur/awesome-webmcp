@@ -87,6 +87,7 @@
 
 - [CodelyTV/webmcp-course](https://github.com/CodelyTV/webmcp-course) - Course examples for both [declarative](https://github.com/webmachinelearning/webmcp/pull/76) (`toolname`/`tooldescription` attributes) and [imperative](https://webmachinelearning.github.io/webmcp) (`navigator.modelContext`) APIs. Tied to [Codely Pro Spanish course](https://pro.codely.com/library/webmcp-anade-capacidades-agenticas-a-tu-web).
 - [taqm/webmcp-sample](https://github.com/taqm/webmcp-sample) - Next.js + TypeScript starter template with Bun runtime, Biome linting, and Git hooks.
+- [webmaxru/agent-skills: WebMCP](https://github.com/webmaxru/agent-skills/tree/main/skills/webmcp) - Agent skill with template assets for implementing and debugging browser WebMCP integrations in JavaScript or TypeScript apps.
 - [opentiny/docs](https://github.com/opentiny/docs) - Unified VitePress documentation for the OpenTiny NEXT ecosystem covering `WebMcpClient`, `WebMcpServer`, MCP browser extensions, and related projects.
 
 ## Analysis & Readiness Tools
