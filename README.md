@@ -71,6 +71,7 @@
 
 - [Travel Demo](https://travel-demo.bandarra.me/) - Official Chrome team demo using `searchFlights` tool via [imperative API](https://webmachinelearning.github.io/webmcp). Part of the Chrome Early Preview docs.
 - [Playground WebMCP](https://webmcp.sh/) - Interactive browser playground for connecting to MCP servers, running tools, and querying in-browser PostgreSQL. ([Source](https://github.com/WebMCP-org/webmcp-sh)).
+- [isainative.dev](https://isainative.dev/) - Audit public GitHub repositories for AI coding readiness. Exposing both declarative and imperative WebMCP tools.
 - [grzetich/webmcp-kanban](https://github.com/grzetich/webmcp-kanban) - React kanban board with 8 AI-callable tools (create, move, update, delete cards), drag-and-drop, and localStorage persistence. [Live demo](https://webmcp-kanban-demo.vercel.app).
 - [WebMCP-org/big-calendar](https://github.com/WebMCP-org/big-calendar) - Next.js calendar with 15 WebMCP tools for CRUD, navigation, and settings. Includes embedded AI agent via chat widget.
 - [WebMCP-org/ai-tinkerers-webmcp-demo](https://github.com/WebMCP-org/ai-tinkerers-webmcp-demo) - In-browser RAG pipeline with document ingestion, Transformers.js embeddings, Dexie/IndexedDB storage, and semantic search via WebMCP tools.
