@@ -14,6 +14,8 @@
 - [Browser Extensions](#browser-extensions)
 - [Bridges & Adapters](#bridges--adapters)
 - [CMS & Platform Integrations](#cms--platform-integrations)
+- [Payment](#payment)
+- [Platforms](#platforms)
 - [Demo Applications](#demo-applications)
 - [Starter Templates & Courses](#starter-templates--courses)
 - [Analysis & Readiness Tools](#analysis--readiness-tools)
@@ -37,6 +39,7 @@
 ## Polyfills & Core Libraries
 
 - [@mcp-b/global](https://www.npmjs.com/package/@mcp-b/global) - [Polyfill](https://webmachinelearning.github.io/webmcp) implementing [`navigator.modelContext`](https://github.com/webmachinelearning/webmcp/issues/24) for browsers without native support. Drop-in replacement with the same API surface as the spec.
+- [webmcp-core](https://www.npmjs.com/package/webmcp-core) - Zero-dependency [`navigator.modelContext`](https://github.com/webmachinelearning/webmcp/issues/24) polyfill (2.94 KB IIFE). Drop-in `@mcp-b/global` replacement with payment metadata support, SSR compatibility, and feature detection for native API fallback. 70 tests, TypeScript strict.
 - [MiguelsPizza/WebMCP](https://github.com/MiguelsPizza/WebMCP) ([mcp-b.ai](https://mcp-b.ai)) - MCP-B reference implementation by [@MiguelsPizza](https://github.com/MiguelsPizza). Monorepo with Chrome extension, tab/extension transports, native-server bridge, and Zod validation. Now continued under WebMCP-org.
 - [ripulio/web-mcp](https://github.com/ripulio/web-mcp) - Monorepo implementing WebMCP with MCP server CLI, Chrome extension, DevTools panel, and [`navigator.modelContext`](https://github.com/webmachinelearning/webmcp/issues/24) polyfill.
 - [opentiny/next-sdk](https://github.com/opentiny/next-sdk) - Frontend AI SDK with `WebMcpServer`/`WebMcpClient` classes, transport adapters (MessageChannel, SSE, HTTP), Zod validation, and Vue 3 chat UI component.
@@ -66,6 +69,14 @@
 - [code-atlantic/webmcp-abilities](https://github.com/code-atlantic/webmcp-abilities) - WordPress plugin bridging the Abilities API to `navigator.modelContext.registerTool()`, exposing any registered ability as a structured tool for AI agents in Chrome 146+.
 - [chgold/wp-ai-connect](https://github.com/chgold/wp-ai-connect) - WordPress plugin exposing WebMCP REST API. AI agents authenticate via JWT and invoke tools like `wordpress.searchPosts` and `wordpress.getPost`.
 - [tuvit/webmcp](https://github.com/tuvit/webmcp) - Wix platform extension injecting WebMCP attributes into Wix Stores pages for AI agent access to e-commerce data.
+
+## Payment
+
+- [webmcp-payments](https://www.npmjs.com/package/webmcp-payments) - x402 payment acceptance middleware for WebMCP tools. Enables websites to charge AI agents per tool invocation using the HTTP 402 payment protocol with inline pricing metadata.
+
+## Platforms
+
+- [webmcp-platform](https://www.npmjs.com/package/webmcp-platform) - Unified WebMCP platform integrating polyfill, payments, and SDK into a single import. One-line setup for making websites agent-friendly with built-in monetization via x402.
 
 ## Demo Applications
 
