@@ -26,6 +26,7 @@
 ## Framework Libraries
 
 - [@mcp-b/react-webmcp](https://www.npmjs.com/package/@mcp-b/react-webmcp) - React hooks (`useWebMCP`, `useMcpTool`) for registering and invoking WebMCP tools.
+- [Signett](https://github.com/signettai/signett) - TypeScript SDK for registering application functions as native `document.modelContext` tools, with JSON Schema validation, lifecycle bindings, authorization, confirmation, idempotency, recovery, verification, testing, and observability.
 
 ## Browser Extensions
 
