@@ -72,6 +72,7 @@
 - [Doriandarko/webmcp-starter](https://github.com/Doriandarko/webmcp-starter) - Single-file "Midnight Eats" DoorDash-style demo with 9 tools (8 [imperative](https://webmachinelearning.github.io/webmcp), 1 [declarative](https://github.com/webmachinelearning/webmcp/pull/76)) and zero dependencies.
 - [alecron/webmcp-demo](https://github.com/alecron/webmcp-demo) - Notes app with 5 tools (add, list, search, delete, stats) using [`navigator.modelContext.provideContext()`](https://webmachinelearning.github.io/webmcp).
 - [alanw707/webmcp-readiness-radar](https://github.com/alanw707/webmcp-readiness-radar) - Web app scoring a site's WebMCP agent-readiness with pillar-wise breakdown and recommendations.
+- [Timeline Studio](https://video-editor.ai-creator.top/) - Open-source browser video editor with nine WebMCP tools for timeline inspection, previewed clip reordering and basic trimming, guarded undo, and editable project downloads.
 
 ## Starter Templates & Courses
 
