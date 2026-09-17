@@ -6,7 +6,6 @@
 [![Chrome 146+](https://img.shields.io/badge/Chrome-146+-blue.svg)](https://developer.chrome.com/blog/webmcp-epp)
 [![W3C Draft](https://img.shields.io/badge/W3C-Community%20Draft-green.svg)](https://webmachinelearning.github.io/webmcp)
 
-
 ## Official Tooling
 
 - [GoogleChromeLabs/webmcp-tools](https://github.com/GoogleChromeLabs/webmcp-tools) - Official Chrome Labs toolkit with Model Context Tool Inspector extension, WebMCP Evals CLI, React [flight-search demo](https://flight-search.firebaseapp.com) ([imperative](https://webmachinelearning.github.io/webmcp)), and restaurant reservation demo ([declarative](https://github.com/webmachinelearning/webmcp/pull/76)).
@@ -47,6 +46,7 @@
 - [code-atlantic/webmcp-abilities](https://github.com/code-atlantic/webmcp-abilities) - WordPress plugin bridging the Abilities API to `navigator.modelContext.registerTool()`, exposing any registered ability as a structured tool for AI agents in Chrome 146+.
 - [chgold/wp-ai-connect](https://github.com/chgold/wp-ai-connect) - WordPress plugin exposing WebMCP REST API. AI agents authenticate via JWT and invoke tools like `wordpress.searchPosts` and `wordpress.getPost`.
 - [tuvit/webmcp](https://github.com/tuvit/webmcp) - Wix platform extension injecting WebMCP attributes into Wix Stores pages for AI agent access to e-commerce data.
+- [Intlayer](https://intlayer.org) - Open-source content internationalization (i18n) framework and CMS platform. Exposes WebMCP tools for agents to manage authentication, conduct documentation research, access specialized utilities (like an i18n scanner and ICU converter), and retrieve or translate content directly from the web platform.
 
 ## Payment
 
