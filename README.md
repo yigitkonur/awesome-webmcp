@@ -32,6 +32,7 @@
 - [igrigorik/AgentBoard](https://github.com/igrigorik/AgentBoard) - AI switchboard extension by [@igrigorik](https://github.com/igrigorik) with multi-provider LLM sidebar (OpenAI, Anthropic, Google, Ollama), scriptable WebMCP tools running in page context, remote MCP server support, and command templates.
 - [amedina/agentic-web-learning-tool](https://github.com/amedina/agentic-web-learning-tool) - Chrome extension framework for agentic AI workflows, visual workflow composition, MCP server integration, and Chrome built-in AI playground.
 - [WebMCP-org/char-plugin](https://github.com/WebMCP-org/char-plugin) - Claude Code plugin that installs Char embeddable AI agent, configures WebMCP servers, [registers tools](https://github.com/webmachinelearning/webmcp/issues/15), and provides `/char:setup` wizard.
+- [CorsenAI/webmcp-explorer](https://github.com/CorsenAI/webmcp-explorer) - WebMCP Explorer by Corsen AI, a Chrome extension to discover, run and security-review the tools a page registers, with Playwright and SARIF exports and an optional approval-gated local MCP bridge.
 
 ## Bridges & Adapters
 
