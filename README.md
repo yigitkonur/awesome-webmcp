@@ -83,6 +83,7 @@
 ## Analysis & Readiness Tools
 
 - [AI Agent Readiness Scanner](https://scanner.v1be.codes) ([source](https://github.com/ckorhonen/ai-agent-scanner)) - Free tool to score any website's AI agent readiness across 6 categories: WebMCP support, semantic HTML, structured data, llms.txt, crawlability, and content quality. Returns a grade (A–F), a 5-level readiness label (Invisible → AI-Native), per-check fix instructions with code examples, and supports side-by-side competitor comparison.
+- [WebMCP Scanner by Corsen AI](https://webmcp.corsen.ai/) - Online audit of the WebMCP contracts one public page exposes at initial load, with prompt-injection and schema findings, proposed fixes and Markdown, SARIF or JSON reports; it never calls a tool.
 
 ## Reference
 
