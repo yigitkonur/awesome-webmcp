@@ -22,6 +22,7 @@
 - [ripulio/web-mcp](https://github.com/ripulio/web-mcp) - Monorepo implementing WebMCP with MCP server CLI, Chrome extension, DevTools panel, and [`navigator.modelContext`](https://github.com/webmachinelearning/webmcp/issues/24) polyfill.
 - [opentiny/next-sdk](https://github.com/opentiny/next-sdk) - Frontend AI SDK with `WebMcpServer`/`WebMcpClient` classes, transport adapters (MessageChannel, SSE, HTTP), Zod validation, and Vue 3 chat UI component.
 - [jasonjmcghee/WebMCP](https://github.com/jasonjmcghee/WebMCP) - Early WebMCP prototype by [@jasonjmcghee](https://github.com/jasonjmcghee) with client-side widget and localhost WebSocket bridge. NPM package and Docker support. Pre-dates the W3C spec; not spec-compliant.
+- [WebMCPlet](https://github.com/awesomeopen/awesome-open/tree/main/webmcplet) - MIT-licensed, dependency-free script that gives a curated list read-only WebMCP tools and a search panel on the list's own page, from one generated JSON file.
 
 ## Framework Libraries
 
