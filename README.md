@@ -72,6 +72,7 @@
 - [Doriandarko/webmcp-starter](https://github.com/Doriandarko/webmcp-starter) - Single-file "Midnight Eats" DoorDash-style demo with 9 tools (8 [imperative](https://webmachinelearning.github.io/webmcp), 1 [declarative](https://github.com/webmachinelearning/webmcp/pull/76)) and zero dependencies.
 - [alecron/webmcp-demo](https://github.com/alecron/webmcp-demo) - Notes app with 5 tools (add, list, search, delete, stats) using [`navigator.modelContext.provideContext()`](https://webmachinelearning.github.io/webmcp).
 - [alanw707/webmcp-readiness-radar](https://github.com/alanw707/webmcp-readiness-radar) - Web app scoring a site's WebMCP agent-readiness with pillar-wise breakdown and recommendations.
+- [Awesome Open\* Catalog](https://awesomeopen.github.io/awesome-open/) - Catalog of software named Open (content CC0-1.0) whose page registers WebMCP tools to search, inspect, arrange and compare projects, tested with ChatGPT's web UI.
 
 ## Starter Templates & Courses
 
