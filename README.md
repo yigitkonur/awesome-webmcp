@@ -26,6 +26,7 @@
 ## Framework Libraries
 
 - [@mcp-b/react-webmcp](https://www.npmjs.com/package/@mcp-b/react-webmcp) - React hooks (`useWebMCP`, `useMcpTool`) for registering and invoking WebMCP tools.
+- [webmcp-tour](https://www.npmjs.com/package/webmcp-tour) - Zero-dependency script that registers four WebMCP tools (`tour_show_step`, `tour_list_targets`, `tour_dismiss`, `tour_wait_for_interaction`) so any agent can highlight and explain an app's controls ([source](https://github.com/fboldo/webmcp-tour), [demo](https://fboldo.github.io/webmcp-tour/demo/)).
 
 ## Browser Extensions
 
